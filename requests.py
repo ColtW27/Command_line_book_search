@@ -14,7 +14,14 @@ first_book = book_items_list[0]
 # print(book_data["items"][0]['volumeInfo']["title"])
 # print(first_book)
 
-# print(first_book)
-for i in range(0,5):
-    # print(i)
-    print(book_items_list[i]['volumeInfo']["title"])
+reading_list = []  # this can only have 5 items
+
+
+
+def get_title(volume):
+    return volume["volumeInfo"]["title"]
+
+
+
+for i in range(0,5):  # author, title, and publishing company.
+    print(get_title(book_items_list[i]))
