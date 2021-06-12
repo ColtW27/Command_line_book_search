@@ -16,12 +16,14 @@ first_book = book_items_list[0]
 
 reading_list = []  # this can only have 5 items
 
-
+def get_authors(volume):
+    return volume
 
 def get_title(volume):
     return volume["volumeInfo"]["title"]
 
-
+def get_publisher(volume):
+    return volume["publisher"]
 
 for i in range(0,5):  # author, title, and publishing company.
     print(get_title(book_items_list[i]))
