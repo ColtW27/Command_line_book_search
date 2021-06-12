@@ -14,7 +14,6 @@ first_book = book_items_list[0]
 # print(book_data["items"][0]['volumeInfo']["title"])
 # print(first_book)
 
-reading_list = []  # this can only have 5 items
 
 def get_authors(volume):
     return volume["volumeInfo"]["authors"]
@@ -23,18 +22,48 @@ def get_title(volume):
     return volume["volumeInfo"]["title"]
 
 def get_publisher(volume):
-    if "publisher" in volume:
-        return volume["publisher"]
+    if "publisher" in volume["volumeInfo"]:
+        return volume["volumeInfo"]["publisher"]
     else:
         return "Unavailable"
 
+search_results = {}  # create an object to store the seach results so that they 
+# are accessible to add to reading list by id
+
 for i in range(0,5):  # author, title, and publishing company.
+    list_id = i + 1
     volume = book_items_list[i]
     title = get_title(volume)
     authors = get_authors(volume)
     publisher = get_publisher(volume)
 
     volume_information = [title, authors, publisher]
-    print(volume_information)
-    # print(get_title(book_items_list[i]))
+    search_results[list_id] = volume_information  # add volume to search results
+#   under a key of id , offset from index to prevent a 0 list position
+    print(f"({list_id})  {volume_information}")
     
+
+add_to_reading_list = input(f"""Would you like to add any of these to your \
+reading list?  (Yes/no)""").lower()
+
+reading_list = []  # this can only have 5 items
+
+if add_to_reading_list == "yes":
+    book_to_add = input(
+        f"""Okay, which book would you like to add to your reading list? Please specify a list number""")
+
+def add_book_to_reading_list(Volume):
+    volume_from_search_results = search_results[book_to_add]
+    if len(reading_list) < 5:
+        reading_list.append(volume_from_search_results)
+    else:
+        replace_item = input("""It looks like your list is full. Would you like \
+to replace an item in your list? (Yes/No)""")
+        if replace_item == "Yes":
+            print(reading_list)
+            which_book_to_replace = input("""Okay, which book would you like \
+to replace? Please select a list numer""")
+
+
+
+
