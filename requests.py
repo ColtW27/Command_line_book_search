@@ -48,22 +48,32 @@ reading list?  (Yes/no)""").lower()
 
 reading_list = []  # this can only have 5 items
 
-if add_to_reading_list == "yes":
-    book_to_add = input(
-        f"""Okay, which book would you like to add to your reading list? Please specify a list number""")
 
-def add_book_to_reading_list(Volume):
-    volume_from_search_results = search_results[book_to_add]
+def add_book_to_reading_list(volume):
+    volume = int(volume)
+    volume_from_search_results = search_results[volume]
     if len(reading_list) < 5:
         reading_list.append(volume_from_search_results)
     else:
         replace_item = input("""It looks like your list is full. Would you like \
 to replace an item in your list? (Yes/No)""")
-        if replace_item == "Yes":
+        if replace_item == "yes":
             print(reading_list)
-            which_book_to_replace = input("""Okay, which book would you like \
-to replace? Please select a list numer""")
+            book_to_replace = int(input("""Okay, which book would you like \
+to replace? Please select a list numer""")) - 1
+            reading_list[book_to_replace] = volume
+    print(reading_list)
+
+while add_to_reading_list == "yes":
+    book_to_add = input(
+        f"""Okay, which book would you like to add to your reading list? \
+Please specify a list number.""")
+    add_book_to_reading_list(book_to_add)
+
+    add_to_reading_list = input("""I've added that book for you, would you like to \
+add another? (Yes/No)""")
 
 
-
+print("Thanks for visiting!")
+        
 
