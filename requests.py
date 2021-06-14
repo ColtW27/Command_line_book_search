@@ -90,10 +90,24 @@ def get_book_to_add_search_list_number():
 to add? Please select a list number. \n"""))
         except ValueError:
             book_to_replace = ""
-            if book_to_replace not in range(1, 6):
+        if book_to_replace not in range(1, 6):
                 print("That response is not a number between 1 and 5. Please try again.")
-    return int(book_to_replace) - 1
+    return int(book_to_replace)
 
+
+def check_if_still_searching():
+    valid_response = ""
+
+    while valid_response == "":
+        valid_response = input("""Would you like to try a different search? (Yes/No) """).lower()
+        if valid_response == "no":
+            break
+        elif valid_response == "yes":
+            break
+        else:
+            print("Looks like you entered a response other than Yes or No. Please try again.")
+            valid_response = ""
+    return valid_response
 
 def add_book_to_reading_list(volume):
     volume = int(volume)
@@ -114,7 +128,9 @@ to replace an item in your list? (Yes/No) \n""")
             elif replace_item == "no":
                 break
             else:
-                print("""Sorry, you seem to have entered an invalid response, please reread the prompt for clarification and try again.""")
+                print("""Sorry, you seem to have entered an invalid response, \
+please reread the prompt for clarification and try again.""")
+
     print_search_results(search_results)
     print_reading_list(reading_list)
 
@@ -132,9 +148,6 @@ while still_searching == "yes":  # runs the full query cycle
     reading list?  (Yes/no)""").lower()
 
     while add_to_reading_list == "yes":
-    #     book_to_add = input(
-    #         f"""Okay, which book would you like to add to your reading list? \
-    # Please specify a list number. \n""")
         book_to_add = get_book_to_add_search_list_number()
 
         add_book_to_reading_list(book_to_add)
@@ -142,7 +155,8 @@ while still_searching == "yes":  # runs the full query cycle
         add_to_reading_list = input("""I've added that book for you, would you \
 like to add another? (Yes/No) \n""")
 
-    still_searching = input("""Would you like to try a different search? (Yes/No) \
-        """).lower()
+    still_searching = check_if_still_searching()
+    # still_searching = input("""Would you like to try a different search? (Yes/No) \
+    #     """).lower()
     
 print("Thanks for visiting!")
