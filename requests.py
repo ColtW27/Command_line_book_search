@@ -96,16 +96,16 @@ to replace? Please select a list number. \n"""))
     
 
 def get_book_to_add_search_list_number():
-    book_to_replace = ""
-    while book_to_replace not in range(1, 6):
+    book_to_add = ""
+    while book_to_add not in range(1, 6):
         try:
-            book_to_replace = int(input("""Which book would you like \
+            book_to_add = int(input("""Which book would you like \
 to add? Please select a list number. \n"""))
         except ValueError:
-            book_to_replace = ""
-        if book_to_replace not in range(1, 6):
+            book_to_add = ""
+        if book_to_add not in range(1, 6):
                 print("That response is not a number between 1 and 5. Please try again.")
-    return int(book_to_replace)
+    return int(book_to_add)
 
 
 def add_another_book_validation():
@@ -152,7 +152,8 @@ to replace an item in your list? (Yes/No) \n""")
                 print_search_results(search_results)
                 print_reading_list(reading_list)
 
-                book_to_replace = get_list_number_for_book_replacement()
+                book_to_replace = get_list_number_for_book_replacement()  # Abstracts
+# error handling and gets the proper index for the replacement book
                 reading_list[book_to_replace] = volume_from_search_results
             elif replace_item == "no":
                 break
@@ -178,16 +179,16 @@ def begin_search():
 reading list?  (Yes/no)""").lower()
 
     while add_to_reading_list == "yes":
-        book_to_add = get_book_to_add_search_list_number()
+        book_to_add = get_book_to_add_search_list_number()  # gets the number 
+# and handles errors for adding books
 
-        add_book_to_reading_list(book_to_add)
-#         add_to_reading_list = input("""I've added that book for you, would you \
-# like to add another? (Yes/No) \n""")
-        add_to_reading_list = add_another_book_validation()
+        add_book_to_reading_list(book_to_add)  # Takes book and appends or 
+#replaces items to reading list as needed
 
-    still_searching = check_if_still_searching()
-    # still_searching = input("""Would you like to try a different search? (Yes/No) \
-    #     """).lower()
+        add_to_reading_list = add_another_book_validation()  # validates yes or no
+
+    still_searching = check_if_still_searching()  #handles errors and logic to 
+# continue or end book search
 
 
 while still_searching == "yes":  # runs the full query cycle
