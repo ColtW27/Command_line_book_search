@@ -78,14 +78,22 @@ to replace? Please select a list number. \n"""))
             book_to_replace = ""
             if book_to_replace not in range(1, 6):
                 print("That response is not a number between 1 and 5. Please try again.")
-            # continue
-
-        # if book_to_replace not in range(1, 6):
-        #     print("That response is not a number between 1 and 5. Please try again.")
-    # if book_to_replace not in range(1, 6):
 
     return int(book_to_replace) - 1
     
+
+def get_book_to_add_search_list_number():
+    book_to_replace = ""
+    while book_to_replace not in range(1, 6):
+        try:
+            book_to_replace = int(input("""Which book would you like \
+to add? Please select a list number. \n"""))
+        except ValueError:
+            book_to_replace = ""
+            if book_to_replace not in range(1, 6):
+                print("That response is not a number between 1 and 5. Please try again.")
+    return int(book_to_replace) - 1
+
 
 def add_book_to_reading_list(volume):
     volume = int(volume)
@@ -124,9 +132,10 @@ while still_searching == "yes":  # runs the full query cycle
     reading list?  (Yes/no)""").lower()
 
     while add_to_reading_list == "yes":
-        book_to_add = input(
-            f"""Okay, which book would you like to add to your reading list? \
-    Please specify a list number. \n""")
+    #     book_to_add = input(
+    #         f"""Okay, which book would you like to add to your reading list? \
+    # Please specify a list number. \n""")
+        book_to_add = get_book_to_add_search_list_number()
 
         add_book_to_reading_list(book_to_add)
 
