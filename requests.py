@@ -16,6 +16,7 @@ from urllib.request import urlopen  # Python built-in module for opemning and re
 # response = ""
 # book_search_response = ""
 # book_items_list = ""
+reading_list = []  # Holds the user's reading list, this can only have 5 items
 
 def get_search_queury():
     api = "https://www.googleapis.com/books/v1/volumes?q=search_query:"
@@ -86,7 +87,7 @@ def print_reading_list(reading_list):  # Prints the user's reding list
         print(f"({count + 1}) {value}")
     print("\n")
 
-reading_list = []  # Holds the user's reading list, this can only have 5 items
+# reading_list = []  # Holds the user's reading list, this can only have 5 items
 
 
 def add_book_to_reading_list(volume):
@@ -123,7 +124,7 @@ if begin_new_search == 'yes':
     get_search_queury()
     create_search_results()  # curates a list of the top 5 search results
     print_search_results(search_results)  # prints the search results list
-    print_reading_list(reading_list)
+    print_reading_list(reading_list)  # prints the reading list
 print("Thanks for visiting!")
         
 
