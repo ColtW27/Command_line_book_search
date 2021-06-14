@@ -46,6 +46,11 @@ for i in range(0,5):  # author, title, and publishing company.
 add_to_reading_list = input(f"""Would you like to add any of these to your \
 reading list?  (Yes/no)""").lower()
 
+def print_reading_list(reading_list):
+    print("READING LIST \n")
+    for count, value in enumerate(reading_list):
+        print(f"{count + 1} {value}")
+
 reading_list = []  # this can only have 5 items
 
 
@@ -56,22 +61,25 @@ def add_book_to_reading_list(volume):
         reading_list.append(volume_from_search_results)
     else:
         replace_item = input("""It looks like your list is full. Would you like \
-to replace an item in your list? (Yes/No)""")
+to replace an item in your list? (Yes/No) \n""")
         if replace_item == "yes":
-            print(reading_list)
+            # print(reading_list)
+            print_reading_list(reading_list)
+
             book_to_replace = int(input("""Okay, which book would you like \
-to replace? Please select a list numer""")) - 1
-            reading_list[book_to_replace] = volume
-    print(reading_list)
+to replace? Please select a list number. \n""")) - 1
+            reading_list[book_to_replace] = volume_from_search_results
+    # print(reading_list)
+    print_reading_list(reading_list)
 
 while add_to_reading_list == "yes":
     book_to_add = input(
         f"""Okay, which book would you like to add to your reading list? \
-Please specify a list number.""")
+Please specify a list number. \n""")
     add_book_to_reading_list(book_to_add)
 
     add_to_reading_list = input("""I've added that book for you, would you like to \
-add another? (Yes/No)""")
+add another? (Yes/No) \n""")
 
 
 print("Thanks for visiting!")
