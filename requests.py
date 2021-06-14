@@ -6,17 +6,30 @@ reading_list = []  # Holds the user's reading list, this can only have 5 items
 search_results = {}  # create an object to store the seach results so that they
 # are accessible to add to reading list by id
 
-def get_search_queury():  # gets query from user and a response back
-    api = "https://www.googleapis.com/books/v1/volumes?q=search_query:"
-    search_query = input(f"Please enter your search, without spaces. \n ")  # .strip()
-    # send a restful request and receives the response as JSON. This is the entire
-    response = urlopen(api + search_query)
-    # Allows the parsing and conversion of JSON into Python
-    # Represents the entire object and data on search
-    book_search_response = json.load(response)
-    # Items array that holds the volumes (books)
-    global book_items_list
-    book_items_list = book_search_response["items"]
+
+def check_for_search_results(book_search_response):
+    results = None
+    try:
+        results = book_search_response["items"]
+    except KeyError:
+        results = None
+        print("I don't have any results for that search.")
+    return results
+
+
+def get_search_query():  # gets query from user and a response back
+    global book_items_list 
+    book_items_list = None
+    while book_items_list == None:
+        api = "https://www.googleapis.com/books/v1/volumes?q=search_query:"
+        search_query = input(f"Please enter your search, without spaces. \n ")  # .strip()
+        # send a restful request and receives the response as JSON. This is the entire
+        response = urlopen(api + search_query)
+        # Allows the parsing and conversion of JSON into Python
+        # Represents the entire object and data on search
+        book_search_response = json.load(response)
+        # Items array that holds the volumes (books)
+        book_items_list = check_for_search_results(book_search_response)
 
 
 def get_authors(volume):  # returns the list of authors for the volume 
@@ -95,6 +108,22 @@ to add? Please select a list number. \n"""))
     return int(book_to_replace)
 
 
+def add_another_book_validation():
+    valid_response = ""
+
+    while valid_response == "":
+        valid_response = input("""I've added that book for you, would you \
+like to add another? (Yes/No) \n""").lower()
+        if valid_response == "no":
+            break
+        elif valid_response == "yes":
+            break
+        else:
+            print("""Looks like you entered a response other than Yes or No. \
+Please try again.""")
+            valid_response = ""
+    return valid_response
+
 def check_if_still_searching():
     valid_response = ""
 
@@ -138,25 +167,29 @@ please reread the prompt for clarification and try again.""")
 still_searching = "yes"
 
 
-while still_searching == "yes":  # runs the full query cycle
-    get_search_queury()
+# while still_searching == "yes":  # runs the full query cycle
+def begin_search():
+    get_search_query()
     create_search_results()  # curates a list of the top 5 search results
     print_search_results(search_results)  # prints the search results list
     print_reading_list(reading_list)  # prints the reading list
 
     add_to_reading_list = input(f"""Would you like to add any of these to your \
-    reading list?  (Yes/no)""").lower()
+reading list?  (Yes/no)""").lower()
 
     while add_to_reading_list == "yes":
         book_to_add = get_book_to_add_search_list_number()
 
         add_book_to_reading_list(book_to_add)
-
-        add_to_reading_list = input("""I've added that book for you, would you \
-like to add another? (Yes/No) \n""")
+#         add_to_reading_list = input("""I've added that book for you, would you \
+# like to add another? (Yes/No) \n""")
+        add_to_reading_list = add_another_book_validation()
 
     still_searching = check_if_still_searching()
     # still_searching = input("""Would you like to try a different search? (Yes/No) \
     #     """).lower()
-    
+
+
+while still_searching == "yes":  # runs the full query cycle
+    begin_search()
 print("Thanks for visiting!")
