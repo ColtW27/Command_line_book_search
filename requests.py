@@ -1,28 +1,14 @@
 import json  # built in module for json data
 from urllib.request import urlopen  # Python built-in module for opemning and reading URLS
 
-# create variable to house the api and search query
-# api = "https://www.googleapis.com/books/v1/volumes?q=search_query:"
-# search_queury = input(f"Please enter your search \n ") #.strip()
 
-# # send a restful request and receives the response as JSON. This is the entire
-# response = urlopen(api + search_queury)
-# # Allows the parsing and conversion of JSON into Python
-# book_search_response = json.load(response)  # Represents the entire object and data on search
-# book_items_list = book_search_response["items"] # Items array that holds the volumes (books)
-
-# api = ""
-# search_queury = ""
-# response = ""
-# book_search_response = ""
-# book_items_list = ""
 reading_list = []  # Holds the user's reading list, this can only have 5 items
 search_results = {}  # create an object to store the seach results so that they
 # are accessible to add to reading list by id
 
 def get_search_queury():  # gets query from user and a response back
     api = "https://www.googleapis.com/books/v1/volumes?q=search_query:"
-    search_query = input(f"Please enter your search \n ")  # .strip()
+    search_query = input(f"Please enter your search, without spaces. \n ")  # .strip()
     # send a restful request and receives the response as JSON. This is the entire
     response = urlopen(api + search_query)
     # Allows the parsing and conversion of JSON into Python
@@ -75,13 +61,6 @@ def print_search_results(search_results):  # prints the search results list
         print(f"({list_id})  {volume_information} ")
     print("\n")  
 
-# get_search_queury()
-# create_search_results()  # curates a list of the top 5 search results
-# print_search_results(search_results)  # prints the search results list
-
-# add_to_reading_list = input(f"""Would you like to add any of these to your \
-# reading list?  (Yes/no)""").lower()
-
 
 def print_reading_list(reading_list):  # Prints the user's reding list
     print("READING LIST \n")
@@ -96,21 +75,45 @@ def add_book_to_reading_list(volume):
     if len(reading_list) < 5:
         reading_list.append(volume_from_search_results)
     else:  # at this point the user's reading list is full
-        replace_item = input("""It looks like your list is full. Would you like \
+        replace_item = "no"
+        while replace_item != 'yes':
+            replace_item = input("""It looks like your list is full. Would you like \
 to replace an item in your list? (Yes/No) \n""")
-        if replace_item == "yes":
-            print_search_results(search_results)
-            print_reading_list(reading_list)
+            if replace_item == "yes":
+                print_search_results(search_results)
+                print_reading_list(reading_list)
 
-            book_to_replace = int(input("""Okay, which book would you like \
+                book_to_replace = int(input("""Okay, which book would you like \
 to replace? Please select a list number. \n""")) - 1
-            reading_list[book_to_replace] = volume_from_search_results
-
+                reading_list[book_to_replace] = volume_from_search_results
+            elif replace_item == "no":
+                break
+            else:
+                print("""Sorry, you seem to have entered an invalid response, please reread the prompt for clarification and try again.""")
     print_search_results(search_results)
     print_reading_list(reading_list)
+# def add_book_to_reading_list(volume):
+#     volume = int(volume)
+#     volume_from_search_results = search_results[volume]  # gets the current volume
+#     if len(reading_list) < 5:
+#         reading_list.append(volume_from_search_results)
+#     else:  # at this point the user's reading list is full
+#         replace_item = input("""It looks like your list is full. Would you like \
+# to replace an item in your list? (Yes/No) \n""")
+#         if replace_item == "yes":
+#             print_search_results(search_results)
+#             print_reading_list(reading_list)
+
+#             book_to_replace = int(input("""Okay, which book would you like \
+# to replace? Please select a list number. \n""")) - 1
+#             reading_list[book_to_replace] = volume_from_search_results
+
+#     print_search_results(search_results)
+#     print_reading_list(reading_list)
 
       
 still_searching = "yes"
+
 
 while still_searching == "yes":  # runs the full query cycle
     get_search_queury()
@@ -131,7 +134,7 @@ while still_searching == "yes":  # runs the full query cycle
         add_to_reading_list = input("""I've added that book for you, would you \
 like to add another? (Yes/No) \n""")
 
-    still_searching = input(""""Would you like to try a different search? (Yes/No) \
+    still_searching = input("""Would you like to try a different search? (Yes/No) \
         """).lower()
     
 print("Thanks for visiting!")
