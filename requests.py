@@ -108,12 +108,15 @@ to add? Please select a list number. \n"""))
     return int(book_to_add)
 
 
-def add_another_book_validation():
+def add_another_book_validation(key):
+    reponse_key = {"first_add": """Would you like to add any of these to your \
+reading list?  (Yes/no) \n""", "subsequent_add": """I've added that book for you, would you \
+like to add another? (Yes/No) \n"""}
+
     valid_response = ""
 
     while valid_response == "":
-        valid_response = input("""I've added that book for you, would you \
-like to add another? (Yes/No) \n""").lower()
+        valid_response = input(reponse_key[key]).lower()
         if valid_response == "no":
             break
         elif valid_response == "yes":
@@ -168,15 +171,13 @@ please reread the prompt for clarification and try again.""")
 still_searching = "yes"
 
 
-# while still_searching == "yes":  # runs the full query cycle
 def begin_search():
     get_search_query()
     create_search_results()  # curates a list of the top 5 search results
     print_search_results(search_results)  # prints the search results list
     print_reading_list(reading_list)  # prints the reading list
 
-    add_to_reading_list = input(f"""Would you like to add any of these to your \
-reading list?  (Yes/no)""").lower()
+    add_to_reading_list = add_another_book_validation("first_add")
 
     while add_to_reading_list == "yes":
         book_to_add = get_book_to_add_search_list_number()  # gets the number 
@@ -185,12 +186,11 @@ reading list?  (Yes/no)""").lower()
         add_book_to_reading_list(book_to_add)  # Takes book and appends or 
 #replaces items to reading list as needed
 
-        add_to_reading_list = add_another_book_validation()  # validates yes or no
-
-    still_searching = check_if_still_searching()  #handles errors and logic to 
-# continue or end book search
+        add_to_reading_list = add_another_book_validation("subsequent_add")  # validates yes or no
 
 
 while still_searching == "yes":  # runs the full query cycle
     begin_search()
+    still_searching = check_if_still_searching()  # handles errors and logic to
+# continue or end book search
 print("Thanks for visiting!")
