@@ -30,18 +30,31 @@ def get_publisher(volume):
 search_results = {}  # create an object to store the seach results so that they 
 # are accessible to add to reading list by id
 
-for i in range(0,5):  # author, title, and publishing company.
-    list_id = i + 1
-    volume = book_items_list[i]
-    title = get_title(volume)
-    authors = get_authors(volume)
-    publisher = get_publisher(volume)
+def create_search_results():
+    for i in range(0,5):  # author, title, and publishing company.
+        list_id = i + 1
+        volume = book_items_list[i]
+        title = get_title(volume)
+        authors = get_authors(volume)
+        publisher = get_publisher(volume)
 
-    volume_information = [title, authors, publisher]
-    search_results[list_id] = volume_information  # add volume to search results
-#   under a key of id , offset from index to prevent a 0 list position
-    print(f"({list_id})  {volume_information}")
-    
+        volume_information = [title, authors, publisher]
+        search_results[list_id] = volume_information  # add volume to search results
+    #   under a key of id , offset from index to prevent a 0 list position
+        # print(f"({list_id})  {volume_information}")
+
+
+def print_search_results(search_results):
+    print("SEARCH RESULTS \n")
+    for count, value in enumerate(search_results):
+        list_id = count - 1
+        volume_information = search_results[value]
+        # print(f"search_results[value]")
+        print(f"({list_id})  {volume_information} ")
+    print("\n")  
+
+create_search_results()
+print_search_results(search_results)
 
 add_to_reading_list = input(f"""Would you like to add any of these to your \
 reading list?  (Yes/no)""").lower()
@@ -50,6 +63,7 @@ def print_reading_list(reading_list):
     print("READING LIST \n")
     for count, value in enumerate(reading_list):
         print(f"{count + 1} {value}")
+    print("\n")
 
 reading_list = []  # this can only have 5 items
 
@@ -64,12 +78,14 @@ def add_book_to_reading_list(volume):
 to replace an item in your list? (Yes/No) \n""")
         if replace_item == "yes":
             # print(reading_list)
+            print_search_results(search_results)
             print_reading_list(reading_list)
 
             book_to_replace = int(input("""Okay, which book would you like \
 to replace? Please select a list number. \n""")) - 1
             reading_list[book_to_replace] = volume_from_search_results
     # print(reading_list)
+    print_search_results(search_results)
     print_reading_list(reading_list)
 
 while add_to_reading_list == "yes":
