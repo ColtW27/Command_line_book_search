@@ -2,14 +2,32 @@ import json  # built in module for json data
 from urllib.request import urlopen  # Python built-in module for opemning and reading URLS
 
 # create variable to house the api and search query
-api = "https://www.googleapis.com/books/v1/volumes?q=search_query:"
-search_queury = input(f"Please enter your search \n ") #.strip()
+# api = "https://www.googleapis.com/books/v1/volumes?q=search_query:"
+# search_queury = input(f"Please enter your search \n ") #.strip()
 
-# send a restful request and receives the response as JSON. This is the entire
-response = urlopen(api + search_queury)
-# Allows the parsing and conversion of JSON into Python
-book_search_response = json.load(response)  # Represents the entire object and data on search
-book_items_list = book_search_response["items"] # Items array that holds the volumes (books)
+# # send a restful request and receives the response as JSON. This is the entire
+# response = urlopen(api + search_queury)
+# # Allows the parsing and conversion of JSON into Python
+# book_search_response = json.load(response)  # Represents the entire object and data on search
+# book_items_list = book_search_response["items"] # Items array that holds the volumes (books)
+
+# api = ""
+# search_queury = ""
+# response = ""
+# book_search_response = ""
+# book_items_list = ""
+
+def get_search_queury():
+    api = "https://www.googleapis.com/books/v1/volumes?q=search_query:"
+    search_query = input(f"Please enter your search \n ")  # .strip()
+    # send a restful request and receives the response as JSON. This is the entire
+    response = urlopen(api + search_query)
+    # Allows the parsing and conversion of JSON into Python
+    # Represents the entire object and data on search
+    book_search_response = json.load(response)
+    # Items array that holds the volumes (books)
+    global book_items_list
+    book_items_list = book_search_response["items"]
 
 
 def get_authors(volume):  # returns the list of authors for the volume 
@@ -36,6 +54,7 @@ search_results = {}  # create an object to store the seach results so that they
 def create_search_results():  # curates a list of the top 5 search results
     for i in range(0,5):  # author, title, and publishing company.
         list_id = i + 1
+        # print(book_items_list)
         volume = book_items_list[i]
         title = get_title(volume)
         authors = get_authors(volume)
@@ -54,6 +73,7 @@ def print_search_results(search_results):  # prints the search results list
         print(f"({list_id})  {volume_information} ")
     print("\n")  
 
+get_search_queury()
 create_search_results()  # curates a list of the top 5 search results
 print_search_results(search_results)  # prints the search results list
 
@@ -97,7 +117,13 @@ Please specify a list number. \n""")
     add_to_reading_list = input("""I've added that book for you, would you like to \
 add another? (Yes/No) \n""")
 
-
+begin_new_search = input(""""Would you like to rey a different search? (Yes/No) \
+    """).lower()
+if begin_new_search == 'yes':
+    get_search_queury()
+    create_search_results()  # curates a list of the top 5 search results
+    print_search_results(search_results)  # prints the search results list
+    print_reading_list(reading_list)
 print("Thanks for visiting!")
         
 
