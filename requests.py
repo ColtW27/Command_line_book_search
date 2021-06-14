@@ -17,8 +17,10 @@ from urllib.request import urlopen  # Python built-in module for opemning and re
 # book_search_response = ""
 # book_items_list = ""
 reading_list = []  # Holds the user's reading list, this can only have 5 items
+search_results = {}  # create an object to store the seach results so that they
+# are accessible to add to reading list by id
 
-def get_search_queury():
+def get_search_queury():  # gets query from user and a response back
     api = "https://www.googleapis.com/books/v1/volumes?q=search_query:"
     search_query = input(f"Please enter your search \n ")  # .strip()
     # send a restful request and receives the response as JSON. This is the entire
@@ -37,11 +39,13 @@ def get_authors(volume):  # returns the list of authors for the volume
     else:
         return "Unavailable"
 
+
 def get_title(volume):  # returns the title for the volume
     if "title" in volume["volumeInfo"]:
         return volume["volumeInfo"]["title"]
     else:
         return "Unavailable"
+
 
 def get_publisher(volume):  # returns the publisher for the volume
     if "publisher" in volume["volumeInfo"]:
@@ -49,13 +53,10 @@ def get_publisher(volume):  # returns the publisher for the volume
     else:
         return "Unavailable"
 
-search_results = {}  # create an object to store the seach results so that they 
-# are accessible to add to reading list by id
 
 def create_search_results():  # curates a list of the top 5 search results
     for i in range(0,5):  # author, title, and publishing company.
         list_id = i + 1
-        # print(book_items_list)
         volume = book_items_list[i]
         title = get_title(volume)
         authors = get_authors(volume)
@@ -74,20 +75,19 @@ def print_search_results(search_results):  # prints the search results list
         print(f"({list_id})  {volume_information} ")
     print("\n")  
 
-get_search_queury()
-create_search_results()  # curates a list of the top 5 search results
-print_search_results(search_results)  # prints the search results list
+# get_search_queury()
+# create_search_results()  # curates a list of the top 5 search results
+# print_search_results(search_results)  # prints the search results list
 
-add_to_reading_list = input(f"""Would you like to add any of these to your \
-reading list?  (Yes/no)""").lower()
+# add_to_reading_list = input(f"""Would you like to add any of these to your \
+# reading list?  (Yes/no)""").lower()
+
 
 def print_reading_list(reading_list):  # Prints the user's reding list
     print("READING LIST \n")
     for count, value in enumerate(reading_list):
         print(f"({count + 1}) {value}")
     print("\n")
-
-# reading_list = []  # Holds the user's reading list, this can only have 5 items
 
 
 def add_book_to_reading_list(volume):
@@ -109,22 +109,29 @@ to replace? Please select a list number. \n""")) - 1
     print_search_results(search_results)
     print_reading_list(reading_list)
 
-while add_to_reading_list == "yes":
-    book_to_add = input(
-        f"""Okay, which book would you like to add to your reading list? \
-Please specify a list number. \n""")
-    add_book_to_reading_list(book_to_add)
+      
+still_searching = "yes"
 
-    add_to_reading_list = input("""I've added that book for you, would you like to \
-add another? (Yes/No) \n""")
-
-begin_new_search = input(""""Would you like to rey a different search? (Yes/No) \
-    """).lower()
-if begin_new_search == 'yes':
+while still_searching == "yes":  # runs the full query cycle
     get_search_queury()
     create_search_results()  # curates a list of the top 5 search results
     print_search_results(search_results)  # prints the search results list
     print_reading_list(reading_list)  # prints the reading list
-print("Thanks for visiting!")
-        
 
+    add_to_reading_list = input(f"""Would you like to add any of these to your \
+    reading list?  (Yes/no)""").lower()
+
+    while add_to_reading_list == "yes":
+        book_to_add = input(
+            f"""Okay, which book would you like to add to your reading list? \
+    Please specify a list number. \n""")
+
+        add_book_to_reading_list(book_to_add)
+
+        add_to_reading_list = input("""I've added that book for you, would you \
+like to add another? (Yes/No) \n""")
+
+    still_searching = input(""""Would you like to try a different search? (Yes/No) \
+        """).lower()
+    
+print("Thanks for visiting!")
