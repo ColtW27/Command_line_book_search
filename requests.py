@@ -23,6 +23,7 @@ def get_search_query():  # gets query from user and a response back
     book_items_list = None
     while book_items_list == None:
         api = "https://www.googleapis.com/books/v1/volumes?q=search_query:"
+        print("\n")
         search_query = input(f"Please enter your search, without spaces. \n")  # .strip()
         # send a restful request and receives the response as JSON. This is the entire
         response = urlopen(api + search_query)
@@ -190,7 +191,7 @@ please reread the prompt for clarification and try again.""")
     print_reading_list(reading_list)
 
       
-still_searching = "yes"
+# still_searching = "yes"
 
 
 def intro():
@@ -225,18 +226,25 @@ def begin_search():
         add_to_reading_list = add_another_book_validation("subsequent_add")  # validates yes or no
 
 
-while still_searching == "yes":  # runs the full query cycle
+
+
+def run_search():
+    still_searching = "yes"
     print("\n")
     intro()
     print("""Hello! Welcome to the Google Books Command Line Search Tool! \n
 I look forward to helping you create a list of your next great reads! \n """)
-    begin_search()
-    still_searching = check_if_still_searching()  # handles errors and logic to
-# continue or end book search 
-print("Thanks for visiting!") # being friendly is helpful
+
+    while still_searching == "yes":  # runs the full query cycle
+        begin_search()
+        still_searching = check_if_still_searching()  # handles errors and logic to
+    # continue or end book search 
+    print("Thanks for visiting!") # being friendly is helpful
 
 
-t = Texttable()
-t.add_rows([['Title', 'Author(s)', 'Publisher'], ['The Lust for Blood', [
-           'Jeffrey A. Kottler'], " Prometheus Books"], ['Vehicles ABC', ['Nosy Crow'], "Nosy Crow"]])
-print(t.draw())
+    t = Texttable()
+    t.add_rows([['Title', 'Author(s)', 'Publisher'], ['The Lust for Blood', [
+            'Jeffrey A. Kottler'], " Prometheus Books"], ['Vehicles ABC', ['Nosy Crow'], "Nosy Crow"]])
+    print(t.draw())
+
+run_search()
