@@ -22,7 +22,7 @@ def get_search_query():  # gets query from user and a response back
     book_items_list = None
     while book_items_list == None:
         api = "https://www.googleapis.com/books/v1/volumes?q=search_query:"
-        search_query = input(f"Please enter your search, without spaces. \n ")  # .strip()
+        search_query = input(f"Please enter your search, without spaces. \n")  # .strip()
         # send a restful request and receives the response as JSON. This is the entire
         response = urlopen(api + search_query)
         # Allows the parsing and conversion of JSON into Python
@@ -131,7 +131,7 @@ def check_if_still_searching():
     valid_response = ""
 
     while valid_response == "":
-        valid_response = input("""Would you like to try a different search? (Yes/No) """).lower()
+        valid_response = input("""Would you like to try a different search? (Yes/No) \n""").lower()
         if valid_response == "no":
             break
         elif valid_response == "yes":
@@ -171,7 +171,21 @@ please reread the prompt for clarification and try again.""")
 still_searching = "yes"
 
 
+def intro():
+    print(""" 
+░█▀▄░█▀█░█▀█░█░█        
+░█▀▄░█░█░█░█░█▀▄        
+░▀▀░░▀▀▀░▀▀▀░▀░▀        
+░█▀▀░█▀▀░█▀█░█▀▄░█▀▀░█░█
+░▀▀█░█▀▀░█▀█░█▀▄░█░░░█▀█
+░▀▀▀░▀▀▀░▀░▀░▀░▀░▀▀▀░▀░▀                                                                        
+    """)
+
 def begin_search():
+    print("\n")
+    intro()
+    print("""Hello! Welcome to the Google Books Command Line Search Tool! \n
+I look forward to helping you create a list of your next great reads! \n """)
     get_search_query()
     create_search_results()  # curates a list of the top 5 search results
     print_search_results(search_results)  # prints the search results list
@@ -194,3 +208,5 @@ while still_searching == "yes":  # runs the full query cycle
     still_searching = check_if_still_searching()  # handles errors and logic to
 # continue or end book search 
 print("Thanks for visiting!") # being friendly is helpful
+
+
