@@ -79,16 +79,15 @@ def print_search_results(search_results):  # prints the search results list
         publisher = search_results[value][2]
         # title = volume_information["title"]
         # print(f"({list_id}) {title}, {authors}, {publisher} ")
-        t.add_rows([['Title', 'Author(s)', 'Publisher'], ['The Lust for Blood', [
-            'Jeffrey A. Kottler', 'jebidiah roosy'], " Prometheus Books"], ['Vehicles ABC', ['Nosy Crow'], "Nosy Crow"]])
-
+        t.add_rows([['Id','Title', 'Author(s)', 'Publisher'], [list_id, title, authors, publisher]])
+        # t.add_rows([['Title', 'Author(s)', 'Publisher'], ['The Lust for Blood', [
+        #     'Jeffrey A. Kottler', 'jebidiah roosy'], " Prometheus Books"], ['Vehicles ABC', ['Nosy Crow'], "Nosy Crow"]])
+    print(t.draw())
     print("\n")  
 
 
 
-    t.add_rows([['Title', 'Author(s)', 'Publisher'], ['The Lust for Blood', [
-           'Jeffrey A. Kottler', 'jebidiah roosy'], " Prometheus Books"], ['Vehicles ABC', ['Nosy Crow'], "Nosy Crow"]])
-    print(t.draw())
+    
 # def print_search_results(search_results):  # prints the search results list
 #     print("SEARCH RESULTS \n")
 #     for count, value in enumerate(search_results):
@@ -205,10 +204,10 @@ def intro():
     """)
 
 def begin_search():
-    print("\n")
-    intro()
-    print("""Hello! Welcome to the Google Books Command Line Search Tool! \n
-I look forward to helping you create a list of your next great reads! \n """)
+    # print("\n")
+#     intro()
+#     print("""Hello! Welcome to the Google Books Command Line Search Tool! \n
+# I look forward to helping you create a list of your next great reads! \n """)
     get_search_query()
     create_search_results()  # curates a list of the top 5 search results
     print_search_results(search_results)  # prints the search results list
@@ -227,6 +226,10 @@ I look forward to helping you create a list of your next great reads! \n """)
 
 
 while still_searching == "yes":  # runs the full query cycle
+    print("\n")
+    intro()
+    print("""Hello! Welcome to the Google Books Command Line Search Tool! \n
+I look forward to helping you create a list of your next great reads! \n """)
     begin_search()
     still_searching = check_if_still_searching()  # handles errors and logic to
 # continue or end book search 
