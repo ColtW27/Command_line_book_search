@@ -192,5 +192,5 @@ def begin_search():
 while still_searching == "yes":  # runs the full query cycle
     begin_search()
     still_searching = check_if_still_searching()  # handles errors and logic to
-# continue or end book search
-print("Thanks for visiting!")
+# continue or end book search 
+print("Thanks for visiting!") # being friendly is helpful
