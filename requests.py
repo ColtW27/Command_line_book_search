@@ -1,3 +1,4 @@
+from texttable import Texttable
 import json  # built in module for json data
 from urllib.request import urlopen  # Python built-in module for opemning and reading URLS
 
@@ -68,11 +69,33 @@ def create_search_results():  # curates a list of the top 5 search results
 
 def print_search_results(search_results):  # prints the search results list
     print("SEARCH RESULTS \n")
+    print()
+    t = Texttable()
     for count, value in enumerate(search_results):
         list_id = count + 1
         volume_information = search_results[value]
-        print(f"({list_id})  {volume_information} ")
+        title = search_results[value][0]
+        authors = search_results[value][1]
+        publisher = search_results[value][2]
+        # title = volume_information["title"]
+        # print(f"({list_id}) {title}, {authors}, {publisher} ")
+        t.add_rows([['Title', 'Author(s)', 'Publisher'], ['The Lust for Blood', [
+            'Jeffrey A. Kottler', 'jebidiah roosy'], " Prometheus Books"], ['Vehicles ABC', ['Nosy Crow'], "Nosy Crow"]])
+
     print("\n")  
+
+
+
+    t.add_rows([['Title', 'Author(s)', 'Publisher'], ['The Lust for Blood', [
+           'Jeffrey A. Kottler', 'jebidiah roosy'], " Prometheus Books"], ['Vehicles ABC', ['Nosy Crow'], "Nosy Crow"]])
+    print(t.draw())
+# def print_search_results(search_results):  # prints the search results list
+#     print("SEARCH RESULTS \n")
+#     for count, value in enumerate(search_results):
+#         list_id = count + 1
+#         volume_information = search_results[value]
+#         print(f"({list_id})  {volume_information} ")
+#     print("\n")  
 
 
 def print_reading_list(reading_list):  # Prints the user's reding list
@@ -210,3 +233,7 @@ while still_searching == "yes":  # runs the full query cycle
 print("Thanks for visiting!") # being friendly is helpful
 
 
+t = Texttable()
+t.add_rows([['Title', 'Author(s)', 'Publisher'], ['The Lust for Blood', [
+           'Jeffrey A. Kottler'], " Prometheus Books"], ['Vehicles ABC', ['Nosy Crow'], "Nosy Crow"]])
+print(t.draw())
