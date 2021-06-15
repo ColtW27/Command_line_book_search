@@ -1,4 +1,4 @@
-from texttable import Texttable
+from texttable import Texttable  # module for creating tables with the information
 import json  # built in module for json data
 from urllib.request import urlopen  # Python built-in module for opemning and reading URLS
 
@@ -69,40 +69,36 @@ def create_search_results():  # curates a list of the top 5 search results
 
 
 def print_search_results(search_results):  # prints the search results list
-    print("SEARCH RESULTS \n")
+    print()
+    print("SEARCH RESULTS")
     print()
     t = Texttable()
+
     for count, value in enumerate(search_results):
         list_id = count + 1
-        volume_information = search_results[value]
         title = search_results[value][0]
         authors = search_results[value][1]
         publisher = search_results[value][2]
-        # title = volume_information["title"]
-        # print(f"({list_id}) {title}, {authors}, {publisher} ")
         t.add_rows([['Id','Title', 'Author(s)', 'Publisher'], [list_id, title, authors, publisher]])
-        # t.add_rows([['Title', 'Author(s)', 'Publisher'], ['The Lust for Blood', [
-        #     'Jeffrey A. Kottler', 'jebidiah roosy'], " Prometheus Books"], ['Vehicles ABC', ['Nosy Crow'], "Nosy Crow"]])
+
     print(t.draw())
     print("\n")  
 
 
-
-    
-# def print_search_results(search_results):  # prints the search results list
-#     print("SEARCH RESULTS \n")
-#     for count, value in enumerate(search_results):
-#         list_id = count + 1
-#         volume_information = search_results[value]
-#         print(f"({list_id})  {volume_information} ")
-#     print("\n")  
-
-
 def print_reading_list(reading_list):  # Prints the user's reding list
+    t = Texttable()
     print("READING LIST \n")
     for count, value in enumerate(reading_list):
-        print(f"({count + 1}) {value}")
+        list_id = count + 1
+        title = reading_list[count][0]
+        authors = reading_list[count][1]
+        publisher = reading_list[count][2]
+        t.add_rows([['Id', 'Title', 'Author(s)', 'Publisher'],
+                    [list_id, title, authors, publisher]])
+
+    print(t.draw())
     print("\n")
+
 
 def get_list_number_for_book_replacement():
     book_to_replace = ""
@@ -190,11 +186,8 @@ please reread the prompt for clarification and try again.""")
     print_search_results(search_results)
     print_reading_list(reading_list)
 
-      
-# still_searching = "yes"
 
-
-def intro():
+def intro():  # Improves Interface
     print(""" 
 ░█▀▄░█▀█░█▀█░█░█        
 ░█▀▄░█░█░█░█░█▀▄        
@@ -205,16 +198,12 @@ def intro():
     """)
 
 def begin_search():
-    # print("\n")
-#     intro()
-#     print("""Hello! Welcome to the Google Books Command Line Search Tool! \n
-# I look forward to helping you create a list of your next great reads! \n """)
-    get_search_query()
+    get_search_query()  # gets query from user and response from the books api
     create_search_results()  # curates a list of the top 5 search results
     print_search_results(search_results)  # prints the search results list
     print_reading_list(reading_list)  # prints the reading list
 
-    add_to_reading_list = add_another_book_validation("first_add")
+    add_to_reading_list = add_another_book_validation("first_add")  # validates yes or no response
 
     while add_to_reading_list == "yes":
         book_to_add = get_book_to_add_search_list_number()  # gets the number 
@@ -223,12 +212,10 @@ def begin_search():
         add_book_to_reading_list(book_to_add)  # Takes book and appends or 
 #replaces items to reading list as needed
 
-        add_to_reading_list = add_another_book_validation("subsequent_add")  # validates yes or no
+        add_to_reading_list = add_another_book_validation("subsequent_add")  # validates yes or no response
 
 
-
-
-def run_search():
+def run_search():  # runs the program
     still_searching = "yes"
     print("\n")
     intro()
@@ -241,10 +228,9 @@ I look forward to helping you create a list of your next great reads! \n """)
     # continue or end book search 
     print("Thanks for visiting!") # being friendly is helpful
 
-
-    t = Texttable()
-    t.add_rows([['Title', 'Author(s)', 'Publisher'], ['The Lust for Blood', [
-            'Jeffrey A. Kottler'], " Prometheus Books"], ['Vehicles ABC', ['Nosy Crow'], "Nosy Crow"]])
-    print(t.draw())
+    # t = Texttable()
+    # t.add_rows([['Title', 'Author(s)', 'Publisher'], ['The Lust for Blood', [
+    #         'Jeffrey A. Kottler'], " Prometheus Books"], ['Vehicles ABC', ['Nosy Crow'], "Nosy Crow"]])
+    # print(t.draw())
 
 run_search()
