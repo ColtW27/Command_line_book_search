@@ -5,11 +5,15 @@ Repository for a command line based search tool that utilizes the Google Books A
 
 ### This repository is for a command line based search tool that utilizes the Google Books Api and a command line interface with Python.
 #### For best results, have your terminal opened in a large viewing window.
+#### Install dependencies:
+```console
+pip install -r requirements.txt
+```
 #### How to use:
 ##### - To use this search tool, simply clone, download, or copy the repository onto your local machine.
 ##### - Run the file requests.py and follow the prompts 
 ```console
-$ python3 requests.py 
+$ python3 book_search.py 
 ```
 ##### - You will see the prompts begin immediately
 ```console
