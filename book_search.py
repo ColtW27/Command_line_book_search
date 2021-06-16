@@ -39,10 +39,9 @@ def begin_search():
         book_to_add = get_book_to_add_search_list_number()  # gets the number 
 # and handles errors for adding books
 
-        add_book_to_reading_list(book_to_add, search_results, reading_list)  # Takes book and appends or 
-#replaces items to reading list as needed
+        add_book_to_reading_list(book_to_add, search_results, reading_list)  # Takes book and appends or replaces item to reading list as needed
 
-        # add_to_reading_list = add_another_book_validation("subsequent_add")  # validates yes or no response
+        add_to_reading_list = add_another_book_validation("subsequent_add")  # validates yes or no response
 
 
 def run_search():  # runs the program
