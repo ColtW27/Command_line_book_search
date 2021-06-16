@@ -25,9 +25,9 @@ def get_list_number_for_book_replacement():
         try:
             book_to_replace = int(input("""Which book would you like \
 to replace? Please select a list number. \n"""))
-        except ValueError:
+        except ValueError:  # handles non number inputs
             book_to_replace = ""
-        if book_to_replace not in range(1, 6):
+        if book_to_replace not in range(1, 6):  # specifies if the input is out of the list range
             print("That response is not a number between 1 and 5. Please try again.")
 
     return int(book_to_replace) - 1
@@ -41,6 +41,7 @@ def get_book_to_add_search_list_number():
 to add? Please select a list number. \n"""))
         except ValueError:
             book_to_add = ""
+        # specifies if the input is out of the list range
         if book_to_add not in range(1, 6):
             print("That response is not a number between 1 and 5. Please try again.")
     return int(book_to_add)

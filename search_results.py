@@ -14,7 +14,7 @@ def create_search_results(book_items_list, search_results):
     #   under a key of id , offset from index to prevent a 0 list position
 
 
-def check_for_search_results(book_search_response):
+def check_for_search_results(book_search_response):  # checks for results and notifies user
     results = None
     try:
         results = book_search_response["items"]
@@ -24,7 +24,7 @@ def check_for_search_results(book_search_response):
     return results
 
 
-def check_if_still_searching():
+def check_if_still_searching():  # asks if the user wants to continue searching and validates response
     valid_response = ""
 
     while valid_response == "":

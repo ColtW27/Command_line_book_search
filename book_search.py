@@ -23,13 +23,13 @@ def get_search_query():  # gets query from user and a response back
         # Represents the entire object and data on search
         book_search_response = json.load(response)
         # Items array that holds the volumes (books)
-        book_items_list = check_for_search_results(book_search_response)
+        book_items_list = check_for_search_results(book_search_response)  #validates the presence of results
 
 
-def begin_search():
+def begin_search():  # Starts search loop
     get_search_query()  # gets query from user and response from the books api
     # curates a list of the top 5 search results
-    create_search_results(book_items_list, search_results)
+    create_search_results(book_items_list, search_results)  # creates dictionary of search results
     print_search_results(search_results)  # prints the search results list
     print_reading_list(reading_list)  # prints the reading list
 
@@ -55,7 +55,7 @@ I look forward to helping you create a list of your next great reads! \n """)
         begin_search()
         still_searching = check_if_still_searching()  # handles errors and logic to
     # continue or end book search 
-    print("Thanks for visiting!") # being friendly is helpful
+    print("Thanks for using our books search tool! Have a great day!") # being friendly is helpful
 
 
 run_search()
