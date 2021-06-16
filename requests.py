@@ -108,8 +108,8 @@ def get_list_number_for_book_replacement():
 to replace? Please select a list number. \n"""))
         except ValueError:
             book_to_replace = ""
-            if book_to_replace not in range(1, 6):
-                print("That response is not a number between 1 and 5. Please try again.")
+        if book_to_replace not in range(1, 6):
+            print("That response is not a number between 1 and 5. Please try again.")
 
     return int(book_to_replace) - 1
     
@@ -178,6 +178,10 @@ to replace an item in your list? (Yes/No) \n""")
 # error handling and gets the proper index for the replacement book
                 reading_list[book_to_replace] = volume_from_search_results
             elif replace_item == "no":
+                print_search_results(search_results)
+                print_reading_list(reading_list)
+                print("Okay, I'll leave your reading list as it was for now. ")
+                replace_item == "yes"
                 break
             else:
                 print("""Sorry, you seem to have entered an invalid response, \
@@ -228,9 +232,5 @@ I look forward to helping you create a list of your next great reads! \n """)
     # continue or end book search 
     print("Thanks for visiting!") # being friendly is helpful
 
-    # t = Texttable()
-    # t.add_rows([['Title', 'Author(s)', 'Publisher'], ['The Lust for Blood', [
-    #         'Jeffrey A. Kottler'], " Prometheus Books"], ['Vehicles ABC', ['Nosy Crow'], "Nosy Crow"]])
-    # print(t.draw())
 
 run_search()
