@@ -1,7 +1,7 @@
 from texttable import Texttable  # module for creating tables with the information
 import json  # built in module for json data
 from urllib.request import urlopen  # Python built-in module for opemning and reading URLS
-
+from intro import intro
 
 reading_list = []  # Holds the user's reading list, this can only have 5 items
 search_results = {}  # create an object to store the seach results so that they
@@ -190,16 +190,6 @@ please reread the prompt for clarification and try again.""")
     print_search_results(search_results)
     print_reading_list(reading_list)
 
-
-def intro():  # Improves Interface
-    print(""" 
-░█▀▄░█▀█░█▀█░█░█        
-░█▀▄░█░█░█░█░█▀▄        
-░▀▀░░▀▀▀░▀▀▀░▀░▀        
-░█▀▀░█▀▀░█▀█░█▀▄░█▀▀░█░█
-░▀▀█░█▀▀░█▀█░█▀▄░█░░░█▀█
-░▀▀▀░▀▀▀░▀░▀░▀░▀░▀▀▀░▀░▀                                                                        
-    """)
 
 def begin_search():
     get_search_query()  # gets query from user and response from the books api
