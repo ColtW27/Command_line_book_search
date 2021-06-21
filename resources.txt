@@ -11,3 +11,5 @@ Stack Overflow:
     * removing emojies
         https://stackoverflow.com/questions/51784964/remove-emojis-from-multilingual-unicode-text/51785357#51785357
 
+        Martijn Pieters
+
