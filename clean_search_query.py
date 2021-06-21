@@ -1,9 +1,11 @@
-def clean_search(query):
-    query = query.strip()
-    query = query.split(" ")
-    query = filter(lambda x: x != "", query)
-    return "".join(list(query))
+def clean_search(query):  # Takes in a query to remove all white space
+    query = query.strip()  # removes outer whitespace
+    query = query.split(" ")  # splits into a list to separate out valid words
+    query = filter(lambda x: x != "", query)  # filter out space
+    query =  "".join(list(query))  # convert back to list from filter and combine
+    return query  # return the new query
 
+# Special characters are left in, as they are able to be processed by the search
 
 # Testcases 
 # these can be run in this file to ensure that the smae result is achieved
