@@ -1,1 +1,2 @@
 texttable==1.6.3
+emoji==1.2.0
