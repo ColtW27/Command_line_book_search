@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 import json  # built in module for json data
 from urllib.request import urlopen  # Python built-in module for opemning and reading URLS
 from intro import intro
