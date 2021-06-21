@@ -1,6 +1,3 @@
-
-
-
 def clean_search(query):
     query = query.strip()
     query = query.split(" ")

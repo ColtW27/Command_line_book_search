@@ -5,6 +5,7 @@ from get_book_data import get_book_to_add_search_list_number
 from add_volumes import add_book_to_reading_list, add_another_book_validation
 from print_lists import print_reading_list, print_search_results
 from search_results import create_search_results, check_for_search_results, check_if_still_searching
+from clean_search_query import clean_search
 reading_list = []  # Holds the user's reading list, this can only have 5 items
 search_results = {}  # create an object to store the seach results so that they
 # are accessible to add to reading list by id
@@ -16,7 +17,8 @@ def get_search_query():  # gets query from user and a response back
     while book_items_list == None:
         api = "https://www.googleapis.com/books/v1/volumes?q=search_query:"
         print("\n")
-        search_query = input(f"Please enter your search, without spaces. \n")  # .strip()
+        search_query = input(f"Please enter your search. \n")  
+        search_query = clean_search(search_query)  # removes all whitespace from search
         # send a restful request and receives the response as JSON. This is the entire
         response = urlopen(api + search_query)
         # Allows the parsing and conversion of JSON into Python
