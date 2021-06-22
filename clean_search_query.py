@@ -3,6 +3,9 @@
 import emoji
 
 
+def validate_search_query():
+    query = input(f"Please enter your search. \n")
+    
 def remove_emoji(text):  # removes emojis from input, credit in resources for 
 # removing emojies
     return emoji.get_emoji_regexp().sub(u'', text)
