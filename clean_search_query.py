@@ -17,20 +17,7 @@ def clean_search(query):  # Takes in a query to remove all white space
     return query  # return the new query
 
 # Special characters are left in, as they are able to be processed by the search
+# This includes quotes, whose inclusion seems to give different search results
 
-# Testcases 
-# these can be run in this file to ensure that the smae result is achieved
-# The output should all be strings devoid of any whitespace
-# print(clean_search("Dance!")) # output => "Dance!"
-# print(clean_search("Dance music"))  # output => "Dancemusic"
-# print(clean_search(" Dance  !   music"))  # output => "Dance!music"
-# # output => "Danceonthestreet!"
-# print(clean_search("    Dance    on   the street!"))
-# print(clean_search("Dance     !"))  # output => "Dance!"
-# print(clean_search("Dance  ""   !"))  # output => "Dance!"
-# print(clean_search("    Dance ''   on   the street!"))
-# print(clean_search("    Dance    on   the street!"))  # Danceonthestreet!
-# print(clean_search("    Dance    on  😁 the street!")) # Danceonthestreet!
-# print(clean_search("    Dance    on   the🚨street!"))  # Danceonthestreet!
 
 
