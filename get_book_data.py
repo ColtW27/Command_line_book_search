@@ -1,6 +1,11 @@
+def list_authors_in_string(authors):
+    pass
+
 def get_authors(volume):  # returns the list of authors for the volume
     if "authors" in volume["volumeInfo"]:
-        return volume["volumeInfo"]["authors"]
+        # return volume["volumeInfo"]["authors"]
+        authors = list_authors_in_string(volume["volumeInfo"]["authors"])
+        return authors
     else:
         return "Unavailable"
 
