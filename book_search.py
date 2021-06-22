@@ -19,10 +19,7 @@ def get_search_query():  # gets query from user and a response back
     while book_items_list == None:
         api = "https://www.googleapis.com/books/v1/volumes?q=search_query:"
         print("\n")
-        search_query = validate_search_query()
-        # search_query = input(f"Please enter your search. \n")  
-        # search_query = clean_search(search_query)  # removes all whitespace from search
-        # # send a restful request and receives the response as JSON. This is the entire
+        search_query = validate_search_query()  # validates search query
         response = urlopen(api + search_query)
         # Allows the parsing and conversion of JSON into Python
         # Represents the entire object and data on search
