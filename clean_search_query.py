@@ -9,7 +9,7 @@ def validate_search_query():
     while not valid_query:
         query = input(f"Please enter your search. Include at least one \
 alphanumeric character. \n")
-        query = clean_search(query)
+        query = clean_search(query)  # strips query of spaces and emojies
 
         if query != "":
             valid_query = True
