@@ -3,9 +3,9 @@ from get_book_data import get_list_number_for_book_replacement
 
 
 def replace_book(volume_id, search_results, reading_list):
-    volume_from_search_results = search_results[volume_id]
+    volume_from_search_results = search_results[volume_id] # get current volume
+    replace_item = "no"  # set to no to enter the loop
 
-    replace_item = "no"
     while replace_item != 'yes':
         replace_item = input("""It looks like your list is full. Would you like \
 to replace an item in your list? (Yes/No) \n""")
