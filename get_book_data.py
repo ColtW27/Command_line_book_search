@@ -28,6 +28,8 @@ def get_publisher(volume):  # returns the publisher for the volume
         return "Unavailable"
 
 #  note for future optimazation, dry up code by combining these two functions, as they are all but identical except for the "- 1"
+
+
 def get_list_number_for_book_replacement():
     book_to_replace = ""
     while book_to_replace not in range(1, 6):
