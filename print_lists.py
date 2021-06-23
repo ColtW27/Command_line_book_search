@@ -5,7 +5,6 @@ def print_search_results(search_results):  # prints the search results list
     print("SEARCH RESULTS")
     print()
     t = Texttable()  # creates a blank texttable 
-
     for count, value in enumerate(search_results):  # iterates over search results to build out table
         list_id = count + 1  # offset to remove zero index from table 
         title = search_results[value][0]
@@ -18,7 +17,7 @@ def print_search_results(search_results):  # prints the search results list
     print("\n")
 
 
-def print_reading_list(reading_list):  # Prints the user's reding list
+def print_reading_list(reading_list):  # Prints the user's reading list
     t = Texttable()  # creats new blank texttable
     print("READING LIST \n")
     # iterates over reading_list to build out table
