@@ -4,10 +4,8 @@ def list_authors_in_string(authors):  # adds "and" and makes the output a string
 
 
 def get_authors(volume):  # returns the list of authors for the volume
-    print(volume)
     if "authors" in volume["volumeInfo"]:
         authors = list_authors_in_string(volume["volumeInfo"]["authors"])
-        print(authors)
         return authors
     else:
         return "Unavailable"
