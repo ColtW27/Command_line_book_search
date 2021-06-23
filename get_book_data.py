@@ -2,12 +2,16 @@ def list_authors_in_string(authors):  # adds "and" and makes the output a string
     authors = " and ".join(authors)
     return authors
 
+
 def get_authors(volume):  # returns the list of authors for the volume
+    print(volume)
     if "authors" in volume["volumeInfo"]:
         authors = list_authors_in_string(volume["volumeInfo"]["authors"])
+        print(authors)
         return authors
     else:
         return "Unavailable"
+    
 
 
 def get_title(volume):  # returns the title for the volume
@@ -24,6 +28,8 @@ def get_publisher(volume):  # returns the publisher for the volume
         return "Unavailable"
 
 #  note for future optimazation, dry up code by combining these two functions, as they are all but identical except for the "- 1"
+
+
 def get_list_number_for_book_replacement():
     book_to_replace = ""
     while book_to_replace not in range(1, 6):

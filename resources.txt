@@ -5,7 +5,8 @@ These are the sources I used
 Python Docs:
     * PEP 263 -- Defining Python Source Code Encodings
         https://www.python.org/dev/peps/pep-0263/
-    
+    * unittest — Unit testing framework
+        https://docs.python.org/3/library/unittest.html
 
 Stack Overflow:
     * removing emojies
