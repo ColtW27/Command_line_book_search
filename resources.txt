@@ -14,3 +14,8 @@ Stack Overflow:
 
         Martijn Pieters
 
+    * Capturing console output
+        https://stackoverflow.com/questions/33767627/python-write-unittest-for-console-print
+
+        Pax Diablo
+
